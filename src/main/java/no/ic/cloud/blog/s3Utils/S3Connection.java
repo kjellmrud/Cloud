@@ -15,12 +15,11 @@ import java.net.URL;
  * Time: 12:39:16
  */
 public class S3Connection {
-    public static String AWS_PROPERTIES = "AwsCredentials.properties";
+    public static String AWS_PROPERTIES = "/AwsCredentials.properties";
 
     public static AmazonS3 getConnection() throws IOException {
-        URL url = ClassLoader.getSystemResource(AWS_PROPERTIES);
-        AWSCredentials credentials = new PropertiesCredentials(
-                url.openStream());
+        URL url = AmazonS3.class.getResource(AWS_PROPERTIES);
+        AWSCredentials credentials = new PropertiesCredentials(url.openStream());
         return new AmazonS3Client(credentials);
     }
 }

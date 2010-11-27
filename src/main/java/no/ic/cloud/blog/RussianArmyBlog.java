@@ -15,7 +15,7 @@ public class RussianArmyBlog extends HttpServlet {
 
     private static final Logger logger = LoggerFactory.getLogger(RussianArmyBlog.class);
 
-    private static final BlogStore STORE = new InMemoryBlogStore();
+    private static final BlogStore STORE = new S3BlogStore();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
