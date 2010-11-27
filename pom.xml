@@ -52,11 +52,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.amazon.aes.webservices.client</groupId>
-            <artifactId>ec2-java-client</artifactId>
-            <version>20080327</version>
-        </dependency>
-        <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk</artifactId>
             <version>1.1.0</version>

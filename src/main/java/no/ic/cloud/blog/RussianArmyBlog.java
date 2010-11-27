@@ -49,7 +49,7 @@ public class RussianArmyBlog extends HttpServlet {
         writer.println("</head>");
         writer.println("<body>");
         writer.println("<h2>Russian Federation Army Blog</h2>");
-        writer.println("<form action=\"/\" method=\"get\">");
+        writer.println("<form action=\"\" method=\"get\">");
         writer.println("<input type=\"text\" name=\"thread\" size=\"100\">");
         writer.println("<input type=\"submit\" value=\"Create\">");
         writer.println("</form>");
@@ -71,7 +71,7 @@ public class RussianArmyBlog extends HttpServlet {
         writer.println("<h2>Russian Federation Army Blog</h2>");
         writer.println("<h3>Thread: " + thread + "</h3>");
         writer.println("<a href=\"/\">All thread</a>");
-        writer.println("<form action=\"/\" method=\"get\">");
+        writer.println("<form action=\"\" method=\"get\">");
         writer.println("<input type=\"text\" name=\"post\" size=\"100\">");
         writer.println("<input type=\"submit\" value=\"Post\">");
         writer.println("<input type=\"hidden\" name=\"thread\" value=\"" + thread + "\">");
