@@ -1,5 +1,6 @@
 package no.ic.cloud.blog;
 
+import no.ic.cloud.blog.s3Utils.S3Connection;
 import org.junit.Test;
 
 import com.amazonaws.AmazonClientException;
@@ -31,11 +32,8 @@ public class S3BlogStoreTest {
 
     @Test
     public void testExistS3Bucket() throws IOException {
-        URL url = ClassLoader.getSystemResource(AWS_PROPERTIES);
-        AWSCredentials credentials = new PropertiesCredentials(
-                url.openStream());
-        AmazonS3 s3 =  new AmazonS3Client(credentials);
 
+        AmazonS3 s3 = S3Connection.getConnection();
         try {
             List<Bucket> buckets = s3.listBuckets();
 
@@ -89,5 +87,12 @@ public class S3BlogStoreTest {
         assertThat(s3).isNotNull();
     }
 
-
+/*
+    @Test
+    public void testS3AddThread() throws Exception {
+        BlogStore bl = new S3BlogStore();
+        bl.addThread("test");
+        assertThat(bl.getThreads()).contains("test");
+    }
+    */
 }
