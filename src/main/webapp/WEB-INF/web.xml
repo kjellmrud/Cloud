@@ -6,6 +6,14 @@
 
     <display-name>Archetype Created Web Application</display-name>
 
-    
+    <servlet>
+        <servlet-name>army-blog</servlet-name>
+        <servlet-class>no.ic.cloud.blog.RussianArmyBlog</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>army-blog</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 
 </web-app>
