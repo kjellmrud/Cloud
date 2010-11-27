@@ -1,6 +1,18 @@
 How to share account details
 http://stackoverflow.com/questions/1895478/sharing-ec2-accounts
+ 
 
-glassfish servers:
+#-- glassfish servers --
+Admin ports:
 http://ec2-46-51-160-2.eu-west-1.compute.amazonaws.com:4848
-http://46.51.172.9:4848
+http://ec2-79-125-37-52.eu-west-1.compute.amazonaws.com:4848
+
+WebServer:
+http://ec2-46-51-160-2.eu-west-1.compute.amazonaws.com:8080
+http://ec2-79-125-37-52.eu-west-1.compute.amazonaws.com:8080
+
+LoadBalancer:
+http://cloud-1830455996.eu-west-1.elb.amazonaws.com/
+
+Connect to serverinstances use ElasticFox
+http://aws.amazon.com/developertools/609?_encoding=UTF8&jiveRedirect=1
