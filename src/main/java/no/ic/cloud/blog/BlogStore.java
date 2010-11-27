@@ -6,5 +6,10 @@ public interface BlogStore {
 
     List<String> getThreads();
 
+    void addThread(String name);
+
+    List<String> getPosts(String thread);
+
+    void addPost(String thread, String post);
 
 }
