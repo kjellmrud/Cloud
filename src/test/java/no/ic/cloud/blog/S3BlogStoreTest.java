@@ -5,16 +5,12 @@ import org.junit.Test;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.PropertiesCredentials;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -27,8 +23,6 @@ import static org.fest.assertions.Assertions.assertThat;
  * Time: 11:06:33
  */
 public class S3BlogStoreTest {
-    private String AWS_PROPERTIES = "AwsCredentials.properties";
-
 
     @Test
     public void testExistS3Bucket() throws IOException {
@@ -89,10 +83,21 @@ public class S3BlogStoreTest {
 
 
     @Test
-    public void testS3AddThread() throws Exception {
+    public void testS3AddAndGetThread() throws Exception {
         BlogStore bl = new S3BlogStore();
         bl.addThread("test");
         assertThat(bl.getThreads()).contains("test");
     }
-    
+
+    @Test
+    public void testS3AddPost() throws Exception {
+        BlogStore bl = new S3BlogStore();
+        bl.addPost("test", "testpost");
+        bl.addPost("test", "whining");
+        assertThat(bl.getThreads()).contains("test");
+        assertThat(bl.getPosts("test")).contains("testpost");
+        for (String s : bl.getPosts("test")) {
+            System.out.println(s);
+        }
+    }
 }

@@ -24,13 +24,13 @@ public class S3BlogStore implements BlogStore {
             s3 = S3Connection.getConnection();
             ObjectListing ol = s3.listObjects("iccloud");
             if (ol.isTruncated()) throw new Error("Oh crap, too many threads");
-            List<S3ObjectSummary> os =  ol.getObjectSummaries();
+            List<S3ObjectSummary> os = ol.getObjectSummaries();
             for (S3ObjectSummary s3s : os) {
                 String key = s3s.getKey();
                 S3Object s3o = s3.getObject(new GetObjectRequest("iccloud", key));
-                InputStream is = s3o.getObjectContent();
-                BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                threads.add(br.readLine());
+                //InputStream is = s3o.getObjectContent();
+                //BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                threads.add(key);
             }
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -42,12 +42,12 @@ public class S3BlogStore implements BlogStore {
         AmazonS3 s3 = null;
         try {
             s3 = S3Connection.getConnection();
-            for (Bucket b : s3.listBuckets()) {
-                b.getName();
+            if (getThreads().contains(name)) {
+                s3.deleteObject("iccloud", name);
             }
             ObjectMetadata objectMetaData = new ObjectMetadata();
-            InputStream thread = new ByteArrayInputStream(name.getBytes());
-            objectMetaData.setContentLength(name.getBytes().length);
+            InputStream thread = new ByteArrayInputStream("".getBytes());
+            objectMetaData.setContentLength("".getBytes().length);
             s3.putObject(new PutObjectRequest("iccloud", name, thread, objectMetaData));
         } catch (IOException e) {
             //LOG this
@@ -58,15 +58,55 @@ public class S3BlogStore implements BlogStore {
     }
 
     public List<String> getPosts(String thread) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        List<String> posts = new ArrayList<String>();
+        AmazonS3 s3 = null;
+        try {
+            s3 = S3Connection.getConnection();
+            ObjectListing ol = s3.listObjects("iccloud");
+            if (ol.isTruncated()) throw new Error("Oh crap, too many posts");
+            List<S3ObjectSummary> os = ol.getObjectSummaries();
+            for (S3ObjectSummary s3s : os) {
+                String key = s3s.getKey();
+                S3Object s3o = s3.getObject(new GetObjectRequest("iccloud", key));
+                InputStream is = s3o.getObjectContent();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                while (br.ready()){
+                    posts.add(br.readLine());
+                }
+                
+            }
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        return posts;
     }
 
     public void addPost(String thread, String post) {
-        try {
-            AmazonS3 s3 = S3Connection.getConnection();
-        } catch (IOException e) {
-            //LOG THIS
-            e.printStackTrace();
+        List<String> threads = getThreads();
+        if (threads.contains(thread)) {
+            List<String> posts = getPosts(thread);
+
+            AmazonS3 s3 = null;
+            try {
+                s3 = S3Connection.getConnection();
+                ObjectMetadata objectMetaData = new ObjectMetadata();
+                InputStream postStream;
+                StringBuilder content = new StringBuilder();
+                for (String p : posts) {
+                    content.append(p);
+                    content.append("\n");
+                }
+                content.append(post);
+                postStream = new ByteArrayInputStream(content.toString().getBytes());
+                objectMetaData.setContentLength(content.toString().getBytes().length);
+                s3.putObject(new PutObjectRequest("iccloud", thread, postStream, objectMetaData));
+            } catch (IOException e) {
+                //LOG this
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+
+        } else {
+            //LOG
         }
     }
 }
