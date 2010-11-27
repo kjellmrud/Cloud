@@ -13,7 +13,7 @@
 
     <servlet-mapping>
         <servlet-name>army-blog</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/blog/</url-pattern>
     </servlet-mapping>
 
 </web-app>
