@@ -87,12 +87,12 @@ public class S3BlogStoreTest {
         assertThat(s3).isNotNull();
     }
 
-/*
+
     @Test
     public void testS3AddThread() throws Exception {
         BlogStore bl = new S3BlogStore();
         bl.addThread("test");
         assertThat(bl.getThreads()).contains("test");
     }
-    */
+    
 }
