@@ -1,0 +1,8 @@
+.gitignore
+*.iml
+*.ipr
+*.iws
+target/
+*.settings
+*.classpath
+*.project
