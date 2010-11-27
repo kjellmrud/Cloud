@@ -55,7 +55,7 @@ public class RussianArmyBlog extends HttpServlet {
         writer.println("</form>");
         writer.println("<ul>");
         for (String thread : threads) {
-            writer.println("<li><a href=\"/?thread=" + thread + "\">" + thread + "</a></li>");
+            writer.println("<li><a href=\"?thread=" + thread + "\">" + thread + "</a></li>");
         }
         writer.println("</ul>");
         writer.println("</body>");
@@ -70,7 +70,7 @@ public class RussianArmyBlog extends HttpServlet {
         writer.println("<body>");
         writer.println("<h2>Russian Federation Army Blog</h2>");
         writer.println("<h3>Thread: " + thread + "</h3>");
-        writer.println("<a href=\"/\">All thread</a>");
+        writer.println("<a href=\"?thread=\">All thread</a>");
         writer.println("<form action=\"\" method=\"get\">");
         writer.println("<input type=\"text\" name=\"post\" size=\"100\">");
         writer.println("<input type=\"submit\" value=\"Post\">");
