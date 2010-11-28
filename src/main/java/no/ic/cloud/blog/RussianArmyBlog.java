@@ -19,7 +19,7 @@ public class RussianArmyBlog extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF8");
         String thread = req.getParameter("thread");
         if (thread != null && thread.trim().length() > 0) {
             String post = req.getParameter("post");
@@ -48,7 +48,7 @@ public class RussianArmyBlog extends HttpServlet {
         writer.println("<head>");
         writer.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />");
         writer.println("</head>");
-        writer.println("<body>");
+        writer.println("<body bgcolor=\"red\">");
         writer.println("<img src=\"flag.gif\">");
         writer.println("<img src=\"arms.gif\">");
         writer.println("<h2>Блог русской армии Федерации</h2>");
@@ -72,7 +72,7 @@ public class RussianArmyBlog extends HttpServlet {
         writer.println("<head>");
         writer.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
         writer.println("</head>");
-        writer.println("<body>");
+        writer.println("<body bgcolor=\"red\">");
         writer.println("<img src=\"flag.gif\">");
         writer.println("<img src=\"arms.gif\">");
         writer.println("<h2>Блог русской армии Федерации</h2>");
