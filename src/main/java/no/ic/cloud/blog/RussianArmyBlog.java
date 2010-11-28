@@ -25,7 +25,7 @@ public class RussianArmyBlog extends HttpServlet {
             List<String> posts;
             try {
                 STORE.getPosts(thread);
-            } catch (IllegalStateException ex) {
+            } catch (RuntimeException ex) {
                 STORE.addThread(thread);
                 logger.debug("Added thread " + thread);
             }
