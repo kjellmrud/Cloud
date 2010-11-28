@@ -19,6 +19,7 @@ public class RussianArmyBlog extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setCharacterEncoding("UTF-8");
         String thread = req.getParameter("thread");
         if (thread != null && thread.trim().length() > 0) {
             String post = req.getParameter("post");
@@ -45,19 +46,23 @@ public class RussianArmyBlog extends HttpServlet {
     private static void printThreads(PrintWriter writer, List<String> threads) {
         writer.println("<html>");
         writer.println("<head>");
-        writer.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
+        writer.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />");
         writer.println("</head>");
         writer.println("<body>");
-        writer.println("<h2>Russian Federation Army Blog</h2>");
+        writer.println("<img src=\"flag.gif\">");
+        writer.println("<img src=\"arms.gif\">");
+        writer.println("<h2>Блог русской армии Федерации</h2>");
         writer.println("<form action=\"\" method=\"get\">");
         writer.println("<input type=\"text\" name=\"thread\" size=\"100\">");
-        writer.println("<input type=\"submit\" value=\"Create\">");
+        writer.println("<input type=\"submit\" value=\"Создать\">");
         writer.println("</form>");
         writer.println("<ul>");
         for (String thread : threads) {
             writer.println("<li><a href=\"?thread=" + thread + "\">" + thread + "</a></li>");
         }
         writer.println("</ul>");
+        writer.println("<img src=\"serve.gif\">");
+        writer.println("<embed src=\"anthem.wav\" autostart=true loop=true>");
         writer.println("</body>");
         writer.println("</html>");
     }
@@ -68,12 +73,14 @@ public class RussianArmyBlog extends HttpServlet {
         writer.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
         writer.println("</head>");
         writer.println("<body>");
-        writer.println("<h2>Russian Federation Army Blog</h2>");
-        writer.println("<h3>Thread: " + thread + "</h3>");
-        writer.println("<a href=\"?thread=\">All thread</a>");
+        writer.println("<img src=\"flag.gif\">");
+        writer.println("<img src=\"arms.gif\">");
+        writer.println("<h2>Блог русской армии Федерации</h2>");
+        writer.println("<h3>Тема: " + thread + "</h3>");
+        writer.println("<a href=\"?thread=\">Все темы</a>");
         writer.println("<form action=\"\" method=\"get\">");
         writer.println("<input type=\"text\" name=\"post\" size=\"100\">");
-        writer.println("<input type=\"submit\" value=\"Post\">");
+        writer.println("<input type=\"submit\" value=\"Сообщение\">");
         writer.println("<input type=\"hidden\" name=\"thread\" value=\"" + thread + "\">");
         writer.println("</form>");
         writer.println("<ul>");
@@ -81,6 +88,8 @@ public class RussianArmyBlog extends HttpServlet {
             writer.println("<li>" + post + "</li>");
         }
         writer.println("</ul>");
+        writer.println("<img src=\"serve.gif\">");
+        writer.println("<embed src=\"anthem.wav\" autostart=true loop=true>");
         writer.println("</body>");
         writer.println("</html>");
     }
